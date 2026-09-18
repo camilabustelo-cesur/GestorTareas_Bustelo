@@ -1,17 +1,64 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import org.example.Listado;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Listado lista = new Listado();
+        System.out.println("Bienvenido al gestor de tareas.");
+        System.out.println("1. Agregar tarea");
+        System.out.println("2. Ver tareas");
+        System.out.println("3. Marcar tarea como completada");
+        System.out.println("4. Eliminar tarea");
+        System.out.println("5. Salir");
+
+        int opcion = 1;
+
+        do {
+            System.out.println("Ingrese la opción deseada:");
+            try {
+                opcion = sc.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Error: Entrada inválida. Por favor, ingrese un número entero.");
+            }
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Ingrese la tarea a agregar:");
+                    String tarea = sc.nextLine();
+                    lista.agregarTarea(tarea);
+                    break;
+                case 2:
+                    lista.verTareas();
+                    break;
+                case 3:
+                    System.out.println("Ingrese el índice de la tarea a marcar como completada:");
+                    int indexCompletada = sc.nextInt();
+                    sc.nextLine();
+                    lista.marcarCompletada(indexCompletada - 1);
+                    break;
+                case 4:
+                    System.out.println("Ingrese el índice de la tarea a eliminar:");
+                    int indexEliminar = sc.nextInt();
+                    sc.nextLine();
+                    lista.eliminarTarea(indexEliminar - 1);
+                    break;
+                case 5:
+                    System.out.println("Saliendo del programa.");
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        } while (opcion != 5);
+
+        sc.close();
     }
+
 }
+
