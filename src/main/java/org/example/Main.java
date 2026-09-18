@@ -56,7 +56,6 @@ public class Main {
                     System.out.println("Opción inválida.");
             }
         } while (opcion != 5);
-
         sc.close();
     }
 
